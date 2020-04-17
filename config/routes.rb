@@ -1,3 +1,13 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  devise_for :users
+
+  resources :posts
+
+  authenticated :user do
+    root to: "posts#index", as: :authenticated_root
+  end
+
+  root to: "pages#landing"
+
+  get "landing" => "pages#landing"
 end
